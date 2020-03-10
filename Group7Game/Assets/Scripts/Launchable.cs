@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Launchable : DraggedObject {
     private HingeJoint2D launchableHinge;
-    private bool isFiring = false;
+    public bool isFiring = false;
     // Use this for initialization
     void Start () {
         rb = gameObject.AddComponent<Rigidbody2D>();
@@ -34,7 +34,17 @@ public class Launchable : DraggedObject {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        isFiring = false;
+
+
+        if (collision.gameObject.tag == "Barrier" && collision.gameObject.GetComponent<Barrier>().isBreakable == true)
+        {
+            if (isFiring == true)
+            {
+                collision.gameObject.SetActive(false);
+            }
+        }
+
+            isFiring = false;
         limitControl = true;
 
         //destroys the rigidbody when colliding with the ground, but only if the player isnt touching the collider

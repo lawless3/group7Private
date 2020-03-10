@@ -33,12 +33,12 @@ public class Barrier : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Launchable" && isBreakable == true)
-        {
-            if(collision.gameObject.GetComponent<Launchable>().getIsFiring() == true)
-            {
-                gameObject.SetActive(false);
-            }
-        }
+        //if(collision.gameObject.tag == "Launchable" && isBreakable == true)
+        //{
+        //    if(collision.gameObject.GetComponent<Launchable>().getIsFiring() == true)
+        //    {
+        //        gameObject.SetActive(false);
+        //    }
+        //}
     }
 }
