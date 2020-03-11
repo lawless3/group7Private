@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DraggedObject : MonoBehaviour {
+public class DraggedObject : MonoBehaviour
+{
     protected bool playerCollision = false; //used to prevent the rigidbody from being destroyed if the player is dragging it
     protected bool isTouchingStone = false; //used to prevent bugs where collisions break the joint
     protected bool isTouchingOtherObject = false; //used to prevent bugs where collisions break the joint
@@ -10,27 +11,47 @@ public class DraggedObject : MonoBehaviour {
     public Rigidbody2D rb;//Rigidbody is dynamically created and destroyed under certain conditions
     protected DistanceJoint2D distanceJoint; //Distance joint to be added to the player when dragging
     public bool afterFrame = false;
-
-
+    private float SafetyBreak = 0;
+    private bool isBreaking = false;
     // Use this for initialization
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
-    void Update () {
-		if(afterFrame == true)
+    void Update()
+    {
+        if (afterFrame == true)
         {
             CreateRB();
             afterFrame = false;
         }
-	}
+
+        if (isBreaking == true)
+        {
+            SafetyBreak += Time.deltaTime;
+        }
+        else
+        {
+            SafetyBreak = 0;
+        }
+
+        if (SafetyBreak >= 0.3f)
+        {
+            print("piss2");
+            Destroy(distanceJoint);
+
+            GameObject.Find("Character").GetComponent<PlayerController>().setIsMovingStone(false);
+            isBreaking = false;
+            SafetyBreak = 0;
+        }
+    }
 
     private void FixedUpdate()
     {
         //limits the movement of the rune stone
-        if(limitControl == true)
+        if (limitControl == true)
         {
             if (rb != null)
             {
@@ -51,9 +72,11 @@ public class DraggedObject : MonoBehaviour {
         //destroys the rigidbody when colliding with the ground, but only if the player isnt touching the collider
         if (collision.gameObject.tag == "Ground")
         {
+            isBreaking = false;
             if (playerCollision == false && GameObject.Find("Character").GetComponent<PlayerController>().getIsMovingStone() == false)
             {
                 Destroy(rb);
+
             }
         }
         //ensures the rune stone does not break the joint when colliding with another rune stone
@@ -75,8 +98,7 @@ public class DraggedObject : MonoBehaviour {
         //makes the stone fall when pushed off a ledge and prevents the joint from breaking if you collide with another stone
         if (collision.gameObject.tag == "Ground" && isTouchingOtherObject == false)
         {
-            Destroy(distanceJoint);
-            GameObject.Find("Character").GetComponent<PlayerController>().setIsMovingStone(false);
+            isBreaking = true;
         }
         //makes it possible for the rune stone to break the joint after falling off edge, should the player touch the rune stone with another rune stone
         if (collision.gameObject.tag == "RuneStone")

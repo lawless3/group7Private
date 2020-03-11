@@ -13,9 +13,9 @@ public class PlayerController : MonoBehaviour
     private bool isOnLadder = false;
     private bool isOnGround = false; // used to check if the player is on the ground
     private GameObject interactable = null;//used to check which game object is currently selected for interaction
-    private bool jump = true;
     public Animator animator;
-    private bool walk = false;
+    private float SafetyBreak = 0;
+    private bool isBreaking = false;
 
     // Use this for initialization
     void Start()
@@ -34,6 +34,24 @@ public class PlayerController : MonoBehaviour
 
         }
         else animator.SetBool("isWalking", false);
+
+        if (isBreaking == true)
+        {
+            SafetyBreak += Time.deltaTime;
+        }
+        else
+        {
+            SafetyBreak = 0;
+        }
+
+        if (SafetyBreak >= 0.3f)
+        {
+            Destroy(interactable.GetComponent<RuneStone>().GetDJ());
+            Destroy(interactable.GetComponent<RuneStone>().GetRB());
+            isMovingStone = false;
+            isBreaking = false;
+            SafetyBreak = 0;
+        }
 
         MovePlayer();
     }
@@ -234,6 +252,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isOnGround = true;
+            isBreaking = false;
         }
         //enables the player to jump and makes the runestone the active interactable object
         if (collision.gameObject.tag == "RuneStone" && isOnLadder == false)
@@ -276,9 +295,7 @@ public class PlayerController : MonoBehaviour
             isOnGround = false;
             if (isMovingStone == true)
             {
-                Destroy(interactable.GetComponent<RuneStone>().GetDJ());
-                Destroy(interactable.GetComponent<RuneStone>().GetRB());
-                isMovingStone = false;
+                isBreaking = true;
             }
         }
 
