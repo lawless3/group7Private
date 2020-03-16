@@ -7,7 +7,6 @@ public class BackgroundManager : MonoBehaviour {
     public List<GameObject> backgrounds;
     public List<GameObject> currentBackgrounds;
     private GameObject character;
-    private int lastIndex = -1;
     public List<Vector3> origonalPositions;
     private float origonalX;
     // Use this for initialization
@@ -22,21 +21,20 @@ public class BackgroundManager : MonoBehaviour {
             background.transform.position = new Vector3(background.transform.position.x + (19.2f * i), background.transform.position.y + 4, background.transform.position.z);
             currentBackgrounds.Add(background);
             origonalPositions.Add(background.transform.position);
-            lastIndex++;
         }
         
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (character.transform.position.x >= currentBackgrounds[lastIndex].transform.position.x - 19.2f)
+
+        if (character.transform.position.x >= currentBackgrounds[currentBackgrounds.Count - 1].transform.position.x - 19.2f)
         {
-            Vector3 backgroundPos = currentBackgrounds[lastIndex].transform.position + new Vector3(19.2f,0, 0);
-            Quaternion backgroundRot = currentBackgrounds[lastIndex].transform.rotation;
+            Vector3 backgroundPos = currentBackgrounds[currentBackgrounds.Count - 1].transform.position + new Vector3(19.2f, 0, 0);
+            Quaternion backgroundRot = currentBackgrounds[currentBackgrounds.Count - 1].transform.rotation;
             GameObject background = Instantiate(backgrounds[Random.Range(0, backgrounds.Count)], backgroundPos, backgroundRot);
             currentBackgrounds.Add(background);
             origonalPositions.Add(background.transform.position);
-            lastIndex++;
         }
         if (character.transform.position.x <= currentBackgrounds[0].transform.position.x + 19.2f)
         {
@@ -45,14 +43,19 @@ public class BackgroundManager : MonoBehaviour {
             GameObject background = Instantiate(backgrounds[Random.Range(0, backgrounds.Count)], backgroundPos, backgroundRot);
             currentBackgrounds.Insert(0, background);
             origonalPositions.Insert(0, background.transform.position);
-            lastIndex++;
         }
+
     }
     private void FixedUpdate()
     {
         for(int i = 0; i < currentBackgrounds.Count; i++)
         {
-            currentBackgrounds[i].transform.position = origonalPositions[i] + new Vector3(origonalX - (character.transform.position.x/15),0,0);
+
+            currentBackgrounds[i].transform.position = origonalPositions[i] + new Vector3(origonalX - (character.transform.position.x/15), character.transform.position.y / 5, 0);
+            if(i > 0)
+            {
+                currentBackgrounds[i].transform.position = new Vector3(currentBackgrounds[i].transform.position.x, currentBackgrounds[0].transform.position.y, 0);
+            }
         }
     }
     

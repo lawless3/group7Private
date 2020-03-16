@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private float SafetyBreak = 0;
     private bool isBreaking = false;
 
+
     // Use this for initialization
     void Start()
     {
@@ -59,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        
     }
 
     //used to move the player
@@ -74,7 +75,6 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.A))
             {
                 rb.AddForce(Vector3.left * speed);
-                //rb.velocity = new Vector3(-1 * speed, rb.velocity.y, 0) ;
                 transform.localScale = new Vector3(-0.3f, 0.3f, 1);
                 isHoldingA = true;
             }
@@ -82,7 +82,6 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.D))
             {
                 rb.AddForce(Vector3.right * speed);
-                //rb.velocity = new Vector3(1 * speed, rb.velocity.y, 0) ;
                 transform.localScale = new Vector3(0.3f, 0.3f, 1);
                 isHoldingD = true;
             }

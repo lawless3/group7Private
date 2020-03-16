@@ -39,5 +39,3 @@ public class RotationTrigger : MonoBehaviour
         }
     }
 }
-
-// THIS SCRIPT DOESN'T WORK YET
