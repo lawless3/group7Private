@@ -9,13 +9,15 @@ public class PlayerController : MonoBehaviour
     public float speed = 1.0f; //the speed of the player
     public float jumpHeight = 5f; // determines how high the player can jump
     private bool isMovingStone = false; // used to check to see if the player is moving a rune stone
+    private bool stoneIsToRight = false; // used to check if the stone is to the right of the player or to the left of the player
     private int checkPoint = 0; // used to check which checkpoint the player is at
-    private bool isOnLadder = false;
+    private bool isOnLadder = false; // used to check if the player is currently on the ladder
     private bool isOnGround = false; // used to check if the player is on the ground
     private GameObject interactable = null;//used to check which game object is currently selected for interaction
-    public Animator animator;
-    private float SafetyBreak = 0;
-    private bool isBreaking = false;
+    public Animator animator; // the animator for animations
+    private float SafetyBreakTime = 0; // used to prevent dragging from breaking when momentarily off the ground
+    private bool isBreaking = false; // used to prevent dragging from breaking when momentarily off the ground
+    private float jumpSafetyBreakTime = 0; // used to prevent the jump animation from transitioning when momentarily off the ground
 
     // Use this for initialization
     void Start()
@@ -35,22 +37,74 @@ public class PlayerController : MonoBehaviour
         }
         else animator.SetBool("isWalking", false);
 
-        if (isBreaking == true)
+
+        if (isOnGround == true)
         {
-            SafetyBreak += Time.deltaTime;
+            
+                animator.SetBool("isJumping", false);
         }
         else
         {
-            SafetyBreak = 0;
+            if (jumpSafetyBreakTime >= 0.3f)
+            {
+                animator.SetBool("isJumping", true);
+                jumpSafetyBreakTime = 0;
+            }
         }
 
-        if (SafetyBreak >= 0.3f)
+
+        animator.SetBool("isDragging", isMovingStone);
+
+        
+
+        if (isBreaking == true)
+        {
+            SafetyBreakTime += Time.deltaTime;
+        }
+        else
+        {
+            SafetyBreakTime = 0;
+        }
+
+        if (SafetyBreakTime >= 0.3f)
         {
             Destroy(interactable.GetComponent<RuneStone>().GetDJ());
             Destroy(interactable.GetComponent<RuneStone>().GetRB());
             isMovingStone = false;
             isBreaking = false;
-            SafetyBreak = 0;
+            SafetyBreakTime = 0;
+        }
+
+        if (isOnGround == false)
+        {
+            jumpSafetyBreakTime += Time.deltaTime;
+        }
+        else
+        {
+            jumpSafetyBreakTime = 0;
+        }
+
+        if(isMovingStone == true && stoneIsToRight == true)
+        {
+            if(rb.velocity.x > 0.2f)
+            {
+                animator.SetBool("isPushing", false);
+            }
+            else if(rb.velocity.x < -0.2f)
+            {
+                animator.SetBool("isPushing", true);
+            }
+        }
+        else if(isMovingStone == true && stoneIsToRight == false)
+        {
+            if (rb.velocity.x > 0.2f)
+            {
+                animator.SetBool("isPushing", true);
+            }
+            else if (rb.velocity.x < -0.2f)
+            {
+                animator.SetBool("isPushing", false);
+            }
         }
 
         MovePlayer();
@@ -59,7 +113,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        
     }
 
     //used to move the player
@@ -74,16 +128,21 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.A))
             {
                 rb.AddForce(Vector3.left * speed);
-                //rb.velocity = new Vector3(-1 * speed, rb.velocity.y, 0) ;
-                transform.localScale = new Vector3(-0.3f, 0.3f, 1);
+                if (isMovingStone == false)
+                {
+                    transform.localScale = new Vector3(-0.3f, 0.3f, 1);
+                }
+                
                 isHoldingA = true;
             }
             //move right
             if (Input.GetKey(KeyCode.D))
             {
                 rb.AddForce(Vector3.right * speed);
-                //rb.velocity = new Vector3(1 * speed, rb.velocity.y, 0) ;
-                transform.localScale = new Vector3(0.3f, 0.3f, 1);
+                if (isMovingStone == false)
+                {
+                    transform.localScale = new Vector3(0.3f, 0.3f, 1);
+                }
                 isHoldingD = true;
             }
             //jump
@@ -148,6 +207,16 @@ public class PlayerController : MonoBehaviour
                 if (isMovingStone == false)
                 {
                     interactable.GetComponent<DraggedObject>().createDraggingComponents();
+                    if(transform.position.x > interactable.transform.position.x)
+                    {
+                        stoneIsToRight = true;
+                        transform.localScale = new Vector3(-0.3f, 0.3f, 1);
+                    }
+                    else
+                    {
+                        stoneIsToRight = false;
+                        transform.localScale = new Vector3(0.3f, 0.3f, 1);
+                    }
                     isMovingStone = true;
                 }
                 //if the player is moving a stone, destroys the components

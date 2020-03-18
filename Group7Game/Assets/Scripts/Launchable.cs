@@ -96,4 +96,16 @@ public class Launchable : DraggedObject {
     {
         launchableHinge = newLaunchableHinge;
     }
+
+    public override void createDraggingComponents()
+    {
+        rb = gameObject.AddComponent<Rigidbody2D>();
+        rb.freezeRotation = true;
+        rb.mass = 0.3f;
+        rb.gravityScale = 1.5f;
+        distanceJoint = gameObject.AddComponent<DistanceJoint2D>();
+        distanceJoint.autoConfigureDistance = false;
+        distanceJoint.distance = 1f * transform.localScale.x;
+        distanceJoint.connectedBody = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().GetRB();
+    }
 }
