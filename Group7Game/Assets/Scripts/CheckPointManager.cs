@@ -30,6 +30,14 @@ public class CheckPointManager : MonoBehaviour {
 
             if (checkPoint.GetComponent<CheckPoint>().checkPointNum == GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().GetCheckPoint())
             {
+                if(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().getIsMovingStone() == true)
+                {
+                    Destroy(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().GetInteractable().GetComponent<RuneStone>().GetDJ());
+                    Destroy(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().GetInteractable().GetComponent<RuneStone>().GetRB());
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().setIsMovingStone(false);
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().SetIsBreaking(false);
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().nullInteractable();
+                }
                 GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().GetRB().velocity = new Vector3(0, 0, 0);
                 GameObject.FindGameObjectWithTag("Player").transform.position = checkPoint.transform.position;
                 if (GameObject.FindGameObjectsWithTag("DragonsBreath").Length != 0)

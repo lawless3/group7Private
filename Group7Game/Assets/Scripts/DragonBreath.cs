@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UI;
 
 public class DragonBreath : MonoBehaviour {
     public float speed;
     public float timeInterval;
     private float timePassed = 0;
     public float stopShake;
+    public GameObject Slider;
 	// Use this for initialization
 	void Start () {
 		
@@ -29,6 +31,7 @@ public class DragonBreath : MonoBehaviour {
             vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
         }
         timePassed += Time.deltaTime;
+        Slider.GetComponent<Slider>().value = timePassed;
 	}
 
     private void FixedUpdate()

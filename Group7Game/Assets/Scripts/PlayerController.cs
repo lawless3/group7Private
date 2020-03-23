@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private float SafetyBreakTime = 0; // used to prevent dragging from breaking when momentarily off the ground
     private bool isBreaking = false; // used to prevent dragging from breaking when momentarily off the ground
     private float jumpSafetyBreakTime = 0; // used to prevent the jump animation from transitioning when momentarily off the ground
-
+    public bool isHidden = false;
     // Use this for initialization
     void Start()
     {
@@ -30,31 +30,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Interact();
-        if (rb.velocity.x != 0)
-        {
-            animator.SetBool("isWalking", true);
 
-        }
-        else animator.SetBool("isWalking", false);
-
-
-        if (isOnGround == true)
-        {
-            
-                animator.SetBool("isJumping", false);
-        }
-        else
-        {
-            if (jumpSafetyBreakTime >= 0.3f)
-            {
-                animator.SetBool("isJumping", true);
-                jumpSafetyBreakTime = 0;
-            }
-        }
-
-
-        animator.SetBool("isDragging", isMovingStone);
-
+        Animate();
         
 
         if (isBreaking == true)
@@ -84,18 +61,50 @@ public class PlayerController : MonoBehaviour
             jumpSafetyBreakTime = 0;
         }
 
-        if(isMovingStone == true && stoneIsToRight == true)
+        
+
+        MovePlayer();
+    }
+
+    void Animate()
+    {
+        if (rb.velocity.x != 0)
         {
-            if(rb.velocity.x > 0.2f)
+            animator.SetBool("isWalking", true);
+
+        }
+        else animator.SetBool("isWalking", false);
+
+
+        if (isOnGround == true)
+        {
+
+            animator.SetBool("isJumping", false);
+        }
+        else
+        {
+            if (jumpSafetyBreakTime >= 0.3f)
+            {
+                animator.SetBool("isJumping", true);
+                jumpSafetyBreakTime = 0;
+            }
+        }
+
+
+        animator.SetBool("isDragging", isMovingStone);
+
+        if (isMovingStone == true && stoneIsToRight == true)
+        {
+            if (rb.velocity.x > 0.2f)
             {
                 animator.SetBool("isPushing", false);
             }
-            else if(rb.velocity.x < -0.2f)
+            else if (rb.velocity.x < -0.2f)
             {
                 animator.SetBool("isPushing", true);
             }
         }
-        else if(isMovingStone == true && stoneIsToRight == false)
+        else if (isMovingStone == true && stoneIsToRight == false)
         {
             if (rb.velocity.x > 0.2f)
             {
@@ -106,10 +115,7 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("isPushing", false);
             }
         }
-
-        MovePlayer();
     }
-
 
     private void FixedUpdate()
     {
@@ -284,9 +290,19 @@ public class PlayerController : MonoBehaviour
             interactable = collision.gameObject;
         }
 
+        if (collision.gameObject.tag == "HideObject")
+        {
+            isHidden = true;
+        }
+
         if (collision.gameObject.tag == "DragonsBreath")
         {
-            GameObject.Find("CheckPointManager").GetComponent<CheckPointManager>().resetPuzzle();
+            if(isHidden == false)
+            {
+                GameObject.Find("CheckPointManager").GetComponent<CheckPointManager>().resetPuzzle();
+                print("reset");
+            }
+            print("passed");
         }
     }
 
@@ -312,6 +328,11 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Catapult" && isMovingStone == false)
         {
             interactable = null;
+        }
+
+        if (collision.gameObject.tag == "HideObject")
+        {
+            isHidden = false;
         }
     }
 
@@ -417,4 +438,18 @@ public class PlayerController : MonoBehaviour
         checkPoint = newCheckPoint;
     }
 
+    public GameObject GetInteractable()
+    {
+        return interactable;
+    }
+
+    public void nullInteractable()
+    {
+        interactable = null;
+    }
+
+    public void SetIsBreaking(bool newIsBreaking)
+    {
+        isBreaking = newIsBreaking;
+    }
 }
