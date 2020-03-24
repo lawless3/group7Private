@@ -482,14 +482,14 @@ MonoBehaviour:
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
-  m_ScreenX: 0.494
-  m_ScreenY: 0.634
+  m_ScreenX: 0.458
+  m_ScreenY: 0.652
   m_CameraDistance: 10
   m_DeadZoneWidth: 0.1
   m_DeadZoneHeight: 0.1
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.87
+  m_SoftZoneWidth: 0.86
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
   m_BiasY: 0
@@ -633,7 +633,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 352436056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.19363117, y: 1.7180002, z: -10}
+  m_LocalPosition: {x: 1.3554121, y: 2.0240002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6341,7 +6341,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1268186496}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.19363117, y: 1.7180002, z: -10}
+  m_LocalPosition: {x: 1.3554121, y: 2.0240002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 219530340}
@@ -6593,9 +6593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85537332f742aaf46b5563ff86d6f884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgrounds:
-  - {fileID: 1289020381392972, guid: 163d65d6968ffc446a7298821f684e8d, type: 2}
-  - {fileID: 1560897251278334, guid: 371b24b63ce761e4da41a45af5b90d2f, type: 2}
+  backgrounds: []
   currentBackgrounds: []
   origonalPositions: []
 --- !u!4 &1479540305
