@@ -52,6 +52,15 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (isOnLadder == true)
+        {
+            animator.SetBool("isClimbing", true);
+        }
+        else
+        {
+            animator.SetBool("isClimbing", false);
+        }
+
 
         animator.SetBool("isDragging", isMovingStone);
 
@@ -150,6 +159,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (isOnGround == true && isMovingStone == false)
                 {
+                    animator.SetTrigger("takeOff");
                     rb.velocity = new Vector3(rb.velocity.x, jumpHeight, 0);
                     isOnGround = false;
                 }
