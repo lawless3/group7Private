@@ -9,7 +9,7 @@ public class DragonBreath : MonoBehaviour {
     public float timeInterval;
     private float timePassed = 0;
     public float stopShake;
-    public GameObject Slider;
+    public GameObject Fill;
 	// Use this for initialization
 	void Start () {
 		
@@ -31,7 +31,7 @@ public class DragonBreath : MonoBehaviour {
             vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
         }
         timePassed += Time.deltaTime;
-        Slider.GetComponent<Slider>().value = timePassed;
+        Fill.GetComponent<Image>().fillAmount = timePassed / timeInterval;
 	}
 
     private void FixedUpdate()
