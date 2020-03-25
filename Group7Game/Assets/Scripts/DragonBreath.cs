@@ -19,7 +19,7 @@ public class DragonBreath : MonoBehaviour {
 	void Update () {
         if(timePassed >= timeInterval)
         {
-            transform.position = new Vector3(GameObject.Find("Character").transform.position.x + 30, GameObject.Find("Character").transform.position.y + 18, 0);
+            transform.position = new Vector3(GameObject.Find("Character").transform.position.x - 60, GameObject.Find("Character").transform.position.y + 18, 0);
             timePassed = 0;
             CinemachineVirtualCamera vcam = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
             vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0.5f;
@@ -36,7 +36,7 @@ public class DragonBreath : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        transform.position += new Vector3(-speed, 0, 0) * Time.deltaTime;
+        transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
     }
 
     public void resetTime()

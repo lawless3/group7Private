@@ -40,6 +40,7 @@ public class CheckPointManager : MonoBehaviour {
                 }
                 GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().GetRB().velocity = new Vector3(0, 0, 0);
                 GameObject.FindGameObjectWithTag("Player").transform.position = checkPoint.transform.position;
+
                 if (GameObject.FindGameObjectsWithTag("DragonsBreath").Length != 0)
                 {
                     GameObject.FindGameObjectWithTag("DragonsBreath").GetComponent<DragonBreath>().resetTime();
