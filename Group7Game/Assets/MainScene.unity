@@ -883,6 +883,7 @@ MonoBehaviour:
   speed: 10
   timeInterval: 15
   stopShake: 2
+  barReductionTime: 2
   Fill: {fileID: 1635339121}
 --- !u!198 &439702563
 ParticleSystem:
