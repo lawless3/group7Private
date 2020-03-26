@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private float SafetyBreakTime = 0; // used to prevent dragging from breaking when momentarily off the ground
     private bool isBreaking = false; // used to prevent dragging from breaking when momentarily off the ground
     private float jumpSafetyBreakTime = 0; // used to prevent the jump animation from transitioning when momentarily off the ground
-
+    public bool isHidden = false;
     // Use this for initialization
     void Start()
     {
@@ -50,6 +50,15 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("isJumping", true);
                 jumpSafetyBreakTime = 0;
             }
+        }
+
+        if (isOnLadder == true)
+        {
+            animator.SetBool("isClimbing", true);
+        }
+        else
+        {
+            animator.SetBool("isClimbing", false);
         }
 
 
@@ -150,6 +159,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (isOnGround == true && isMovingStone == false)
                 {
+                    animator.SetTrigger("takeOff");
                     rb.velocity = new Vector3(rb.velocity.x, jumpHeight, 0);
                     isOnGround = false;
                 }
@@ -284,9 +294,19 @@ public class PlayerController : MonoBehaviour
             interactable = collision.gameObject;
         }
 
+        if (collision.gameObject.tag == "HideObject")
+        {
+            isHidden = true;
+        }
+
         if (collision.gameObject.tag == "DragonsBreath")
         {
-            GameObject.Find("CheckPointManager").GetComponent<CheckPointManager>().resetPuzzle();
+            if (isHidden == false)
+            {
+                GameObject.Find("CheckPointManager").GetComponent<CheckPointManager>().resetPuzzle();
+                print("reset");
+            }
+            print("passed");
         }
     }
 
@@ -306,6 +326,11 @@ public class PlayerController : MonoBehaviour
             {
                 rb.gravityScale = 1.5f;
                 isOnLadder = false;
+            }
+
+            if (collision.gameObject.tag == "HideObject")
+            {
+                isHidden = false;
             }
         }
         //makes the interactable null if the player leaves the catapult triggerbox
