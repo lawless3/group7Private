@@ -35,15 +35,11 @@ public class DragonBreath : MonoBehaviour
 
         }
 
-        if (currentShake < stopShake)
-        {
-            currentShake += Time.deltaTime;
-            if (currentShake >= stopShake)
+            if (currentShake >= stopShake && GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain != 0)
             {
                 CinemachineVirtualCamera vcam = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
                 vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
             }
-        }
 
         if (reduceBar == false)
         {
@@ -74,5 +70,5 @@ public class DragonBreath : MonoBehaviour
     {
         timePassed = 0;
     }
-
+    
 }
