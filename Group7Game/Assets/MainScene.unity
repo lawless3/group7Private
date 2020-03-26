@@ -156,7 +156,8 @@ Prefab:
       propertyPath: m_TagString
       value: RuneStone
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 50886327941033026, guid: dc2460c9e90d0e949afbcf3d4c55f5b3, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: dc2460c9e90d0e949afbcf3d4c55f5b3, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &79684441
@@ -554,8 +555,79 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114257311399903508, guid: 502308acc044b9d40a07d1275db185df,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 502308acc044b9d40a07d1275db185df, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &307468175
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4988234386009618, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 95.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988234386009618, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 18.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988234386009618, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.15625
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988234386009618, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988234386009618, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988234386009618, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988234386009618, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988234386009618, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
+      propertyPath: m_RootOrder
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588985804950504, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
+      propertyPath: m_Name
+      value: HideArea (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 61872202132668266, guid: 6f5e29b86f7a84c46836f5a349df7993,
+        type: 2}
+      propertyPath: m_Offset.y
+      value: -5.2299547
+      objectReference: {fileID: 0}
+    - target: {fileID: 61872202132668266, guid: 6f5e29b86f7a84c46836f5a349df7993,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 13.218622
+      objectReference: {fileID: 0}
+    - target: {fileID: 61872202132668266, guid: 6f5e29b86f7a84c46836f5a349df7993,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: 9.349022
+      objectReference: {fileID: 0}
+    - target: {fileID: 61872202132668266, guid: 6f5e29b86f7a84c46836f5a349df7993,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 31.258423
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &352436056
 GameObject:
@@ -825,7 +897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff16b35a680d054c8b51c2d46d1ac0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 13
   timeInterval: 15
   stopShake: 2
   barReductionTime: 2
@@ -5477,7 +5549,7 @@ Prefab:
     - target: {fileID: 114565052890673736, guid: 0874fb074f1b3f8448aca5bf08f4d5ed,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1879523198306692, guid: 0874fb074f1b3f8448aca5bf08f4d5ed, type: 2}
       propertyPath: m_TagString
@@ -5511,6 +5583,48 @@ MonoBehaviour:
   afterFrame: 0
   identifier: 0
   checkPoint: 0
+--- !u!1001 &621078228
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4988234386009618, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 76.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988234386009618, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 18.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988234386009618, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.15625
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988234386009618, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988234386009618, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988234386009618, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988234386009618, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988234386009618, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
+      propertyPath: m_RootOrder
+      value: 29
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 6f5e29b86f7a84c46836f5a349df7993, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &862745730
 GameObject:
   m_ObjectHideFlags: 0
@@ -5854,6 +5968,7 @@ MonoBehaviour:
   speed: 7
   jumpHeight: 7
   animator: {fileID: 0}
+  isHidden: 0
 --- !u!212 &977622848
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6678,7 +6793,13 @@ Prefab:
       propertyPath: m_TagString
       value: RuneStoneSlot
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 61550098041878494, guid: 9a3e2399ddbed08449092191577fc533,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114557618493865138, guid: 9a3e2399ddbed08449092191577fc533, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 9a3e2399ddbed08449092191577fc533, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1357182999
@@ -6739,6 +6860,19 @@ GameObject:
   m_PrefabParentObject: {fileID: 1460389007037870, guid: 9a3e2399ddbed08449092191577fc533,
     type: 2}
   m_PrefabInternal: {fileID: 1289850489}
+--- !u!114 &1441405522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1441405521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb6e688ba6e1643469013ecc321930a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: 0
+  checkPoint: 0
 --- !u!1 &1477212068
 GameObject:
   m_ObjectHideFlags: 0
