@@ -395,16 +395,15 @@ public class PlayerController : MonoBehaviour
                 rb.gravityScale = 1.5f;
                 isOnLadder = false;
             }
-
-            if (collision.gameObject.tag == "HideObject")
-            {
-                isHidden = false;
-            }
         }
         //makes the interactable null if the player leaves the catapult triggerbox
         if (collision.gameObject.tag == "Catapult" && isMovingStone == false)
         {
             interactable = null;
+        }
+        if (collision.gameObject.tag == "HideObject")
+        {
+            isHidden = false;
         }
     }
 
@@ -510,4 +509,8 @@ public class PlayerController : MonoBehaviour
         checkPoint = newCheckPoint;
     }
 
+    public GameObject GetInteractable()
+    {
+        return interactable;
+    }
 }

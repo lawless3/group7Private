@@ -21,13 +21,13 @@ GameObject:
   - component: {fileID: 4830504850188370}
   - component: {fileID: 212831101617950524}
   - component: {fileID: 61956120608509418}
-  - component: {fileID: 114257311399903508}
+  - component: {fileID: 114631040567859908}
   m_Layer: 0
   m_Name: Rotating_Platform_Placeholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4830504850188370
 Transform:
@@ -35,8 +35,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1209728537723794}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.57, y: 2.19, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 73.45209, y: 7.526083, z: 0.51058364}
   m_LocalScale: {x: 0.34063673, y: 0.16429897, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,7 +51,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.075984, y: 0.000007867813}
@@ -67,7 +67,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 12.0361595, y: 4.316192}
   m_EdgeRadius: 0
---- !u!114 &114257311399903508
+--- !u!114 &114631040567859908
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -75,10 +75,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1209728537723794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cbd549a0c9359b4fb51fd8e16ab1bb4, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a2f10e5be47e854dbf64d901ddeef05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  rotatingPlatforms:
+  - {fileID: 0}
 --- !u!212 &212831101617950524
 SpriteRenderer:
   m_ObjectHideFlags: 1
