@@ -334,7 +334,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     isOnLadder = false;
-                    rb.gravityScale = 1.5f;
+                    rb.gravityScale = 1.0f;
                 }
             }
             //Interaction to fire the catapult
@@ -386,13 +386,13 @@ public class PlayerController : MonoBehaviour
             interactable = null;
             if (isOnLadder == true && transform.position.y > collision.transform.position.y)
             {
-                rb.gravityScale = 1.5f;
+                rb.gravityScale = 1.0f;
                 rb.velocity = new Vector3(rb.velocity.x, 5f, 0);
                 isOnLadder = false;
             }
             else if (isOnLadder == true && transform.position.y < collision.transform.position.y)
             {
-                rb.gravityScale = 1.5f;
+                rb.gravityScale = 1.0f;
                 isOnLadder = false;
             }
         }
@@ -465,8 +465,8 @@ public class PlayerController : MonoBehaviour
     void createRigidbody()
     {
         rb = gameObject.AddComponent<Rigidbody2D>();
-        rb.mass = 0.5f;
-        rb.gravityScale = 1.5f;
+        rb.mass = 1.0f;
+        rb.gravityScale = 1.0f;
     }
 
     public bool getIsMovingStone()

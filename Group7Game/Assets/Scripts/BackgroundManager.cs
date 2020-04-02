@@ -15,6 +15,7 @@ public class BackgroundManager : MonoBehaviour
     public float xPixels;
     public float followXRate;
     public float followYRate;
+    public float yOffset;
     // Use this for initialization
     void Start()
     {
@@ -60,7 +61,7 @@ public class BackgroundManager : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        currentBackgrounds[0].transform.position = origonalPositions[0] + new Vector3(origonalX - (character.transform.position.x / followXRate), character.transform.position.y / followYRate, 0);
+        currentBackgrounds[0].transform.position = origonalPositions[0] + new Vector3(origonalX - (character.transform.position.x / followXRate), yOffset + character.transform.position.y / followYRate, 0);
         for (int i = 0; i < currentBackgrounds.Count; i++)
 
         {
