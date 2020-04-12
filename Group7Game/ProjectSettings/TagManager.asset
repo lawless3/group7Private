@@ -19,6 +19,7 @@ TagManager:
   - RotatingPlatform
   - HideObject
   - Bed
+  - Bookshelf
   layers:
   - Default
   - TransparentFX
