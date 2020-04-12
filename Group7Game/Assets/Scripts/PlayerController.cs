@@ -19,11 +19,18 @@ public class PlayerController : MonoBehaviour
     private bool isBreaking = false; // used to prevent dragging from breaking when momentarily off the ground
     private float jumpSafetyBreakTime = 0; // used to prevent the jump animation from transitioning when momentarily off the ground
     public bool isHidden = false;
+
+    bool[] keysPressed = new bool[1024];
     // Use this for initialization
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        for(int i = 0; i < 1024; i++)
+        {
+            keysPressed[i] = false;
+        }
+        
     }
 
     // Update is called once per frame
@@ -116,13 +123,64 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        MovePlayer();
+        GetKeyInputs();
+
+        Animate();
     }
 
+    void GetKeyInputs()
+    {
+        if(Input.GetKey(KeyCode.A))
+        {
+            keysPressed[(int)KeyCode.A] = true;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            keysPressed[(int)KeyCode.D] = true;
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            keysPressed[(int)KeyCode.W] = true;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            keysPressed[(int)KeyCode.S] = true;
+        }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            keysPressed[(int)KeyCode.Space] = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            keysPressed[(int)KeyCode.A] = false;
+        }
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            keysPressed[(int)KeyCode.D] = false;
+        }
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            keysPressed[(int)KeyCode.W] = false;
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            keysPressed[(int)KeyCode.S] = false;
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            keysPressed[(int)KeyCode.Space] = false;
+        }
+    }
+
+    void Animate()
+    {
+
+    }
 
     private void FixedUpdate()
     {
-        
+        MovePlayer();
     }
 
     //used to move the player
@@ -134,7 +192,7 @@ public class PlayerController : MonoBehaviour
         if (isOnLadder == false)
         {
             //move left
-            if (Input.GetKey(KeyCode.A))
+            if (keysPressed[(int)KeyCode.A])
             {
                 rb.AddForce(Vector3.left * speed);
                 if (isMovingStone == false)
@@ -145,7 +203,7 @@ public class PlayerController : MonoBehaviour
                 isHoldingA = true;
             }
             //move right
-            if (Input.GetKey(KeyCode.D))
+            if (keysPressed[(int)KeyCode.D])
             {
                 rb.AddForce(Vector3.right * speed);
                 if (isMovingStone == false)
@@ -155,7 +213,7 @@ public class PlayerController : MonoBehaviour
                 isHoldingD = true;
             }
             //jump
-            if (Input.GetKey(KeyCode.W))
+            if (keysPressed[(int)KeyCode.W])
             {
                 if (isOnGround == true && isMovingStone == false)
                 {
@@ -177,21 +235,21 @@ public class PlayerController : MonoBehaviour
         else
         {
 
-            if (Input.GetKey(KeyCode.W))
+            if (keysPressed[(int)KeyCode.W])
             {
                 transform.position += new Vector3(0, 2.5f, 0) * Time.deltaTime;
             }
-            if (Input.GetKey(KeyCode.S))
+            if (keysPressed[(int)KeyCode.S])
             {
                 transform.position += new Vector3(0, -2.5f, 0) * Time.deltaTime;
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.A) && isHoldingD == false && isOnGround == true)
+        if (!keysPressed[(int)KeyCode.A] && isHoldingD == false && isOnGround == true)
         {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
-        if (Input.GetKeyUp(KeyCode.D) && isHoldingA == false && isOnGround == true)
+        if (!keysPressed[(int)KeyCode.D] && isHoldingA == false && isOnGround == true)
         {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
@@ -243,6 +301,16 @@ public class PlayerController : MonoBehaviour
                 if (isMovingStone == false)
                 {
                     interactable.GetComponent<DraggedObject>().createDraggingComponents();
+                    if (transform.position.x > interactable.transform.position.x)
+                    {
+                        stoneIsToRight = true;
+                        transform.localScale = new Vector3(-0.3f, 0.3f, 1);
+                    }
+                    else
+                    {
+                        stoneIsToRight = false;
+                        transform.localScale = new Vector3(0.3f, 0.3f, 1);
+                    }
                     isMovingStone = true;
                 }
                 //if the player is moving a stone, destroys the components
@@ -266,7 +334,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     isOnLadder = false;
-                    rb.gravityScale = 1.5f;
+                    rb.gravityScale = 1.0f;
                 }
             }
             //Interaction to fire the catapult
@@ -318,25 +386,24 @@ public class PlayerController : MonoBehaviour
             interactable = null;
             if (isOnLadder == true && transform.position.y > collision.transform.position.y)
             {
-                rb.gravityScale = 1.5f;
+                rb.gravityScale = 1.0f;
                 rb.velocity = new Vector3(rb.velocity.x, 5f, 0);
                 isOnLadder = false;
             }
             else if (isOnLadder == true && transform.position.y < collision.transform.position.y)
             {
-                rb.gravityScale = 1.5f;
+                rb.gravityScale = 1.0f;
                 isOnLadder = false;
-            }
-
-            if (collision.gameObject.tag == "HideObject")
-            {
-                isHidden = false;
             }
         }
         //makes the interactable null if the player leaves the catapult triggerbox
         if (collision.gameObject.tag == "Catapult" && isMovingStone == false)
         {
             interactable = null;
+        }
+        if (collision.gameObject.tag == "HideObject")
+        {
+            isHidden = false;
         }
     }
 
@@ -398,8 +465,8 @@ public class PlayerController : MonoBehaviour
     void createRigidbody()
     {
         rb = gameObject.AddComponent<Rigidbody2D>();
-        rb.mass = 0.5f;
-        rb.gravityScale = 1.5f;
+        rb.mass = 1.0f;
+        rb.gravityScale = 1.0f;
     }
 
     public bool getIsMovingStone()
@@ -442,4 +509,8 @@ public class PlayerController : MonoBehaviour
         checkPoint = newCheckPoint;
     }
 
+    public GameObject GetInteractable()
+    {
+        return interactable;
+    }
 }

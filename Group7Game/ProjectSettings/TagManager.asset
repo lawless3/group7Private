@@ -17,6 +17,9 @@ TagManager:
   - Barrier
   - DragonsBreath
   - RotatingPlatform
+  - HideObject
+  - Bed
+  - Bookshelf
   layers:
   - Default
   - TransparentFX

@@ -111,7 +111,7 @@ public class DraggedObject : MonoBehaviour
     {   
         rb = gameObject.AddComponent<Rigidbody2D>();
         rb.freezeRotation = true;
-        rb.mass = 0.3f;
+        rb.mass = 0.6f;
         rb.gravityScale = 1.5f;
         distanceJoint = gameObject.AddComponent<DistanceJoint2D>();
         distanceJoint.autoConfigureDistance = false;

@@ -24,7 +24,7 @@ public class Launchable : DraggedObject {
                 GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().setIsMovingStone(false);
                 GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().setInteractable(null);
             }
-            transform.position = collision.transform.position - new Vector3(1, -0.5f, 0);
+            transform.position = collision.transform.position - new Vector3(1.2f, -0.5f, 0);
             AttachLaunchable(collision);
             gameObject.GetComponent<CircleCollider2D>().enabled = false;
             collision.GetComponent<CatapultArm>().StoreLaunchable(gameObject);
