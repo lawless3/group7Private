@@ -19,7 +19,7 @@ public class BackgroundManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        BackgroundDistance = (xPixels / 100.0f) * 1.5f;
+        BackgroundDistance = (xPixels / 100.0f) * backgroundScale;
         character = GameObject.Find("Character");
         origonalX = character.transform.position.x;
         Vector3 characterPos = character.transform.position - new Vector3((BackgroundDistance * 2), 0, 0);
