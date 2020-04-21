@@ -90,6 +90,7 @@ public class Launchable : DraggedObject {
         Vector3 launchVector;
         launchVector = target - transform.position;
         rb.velocity = launchVector;
+        rb.freezeRotation = false;
     }
 
     public bool getIsFiring()

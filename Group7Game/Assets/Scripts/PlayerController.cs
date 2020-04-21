@@ -84,8 +84,9 @@ public class PlayerController : MonoBehaviour
 
         if (SafetyBreakTime >= 0.3f)
         {
-            Destroy(interactable.GetComponent<RuneStone>().GetDJ());
-            Destroy(interactable.GetComponent<RuneStone>().GetRB());
+            Destroy(interactable.GetComponent<DraggedObject>().GetDJ());
+            Destroy(interactable.GetComponent<DraggedObject>().GetRB());
+            print("wtf3");
             isMovingStone = false;
             isBreaking = false;
             SafetyBreakTime = 0;
@@ -334,7 +335,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     isOnLadder = false;
-                    rb.gravityScale = 1.0f;
+                    rb.gravityScale = 1.5f;
                 }
             }
             //Interaction to fire the catapult
@@ -376,6 +377,12 @@ public class PlayerController : MonoBehaviour
             }
             print("passed");
         }
+
+        if (collision.gameObject.tag == "Death")
+        {
+                GameObject.Find("CheckPointManager").GetComponent<CheckPointManager>().resetPuzzle();
+                print("reset");
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -386,13 +393,13 @@ public class PlayerController : MonoBehaviour
             interactable = null;
             if (isOnLadder == true && transform.position.y > collision.transform.position.y)
             {
-                rb.gravityScale = 1.0f;
+                rb.gravityScale = 1.5f;
                 rb.velocity = new Vector3(rb.velocity.x, 5f, 0);
                 isOnLadder = false;
             }
             else if (isOnLadder == true && transform.position.y < collision.transform.position.y)
             {
-                rb.gravityScale = 1.0f;
+                rb.gravityScale = 1.5f;
                 isOnLadder = false;
             }
         }
@@ -466,7 +473,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = gameObject.AddComponent<Rigidbody2D>();
         rb.mass = 1.0f;
-        rb.gravityScale = 1.0f;
+        rb.gravityScale = 1.5f;
     }
 
     public bool getIsMovingStone()

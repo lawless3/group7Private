@@ -20,6 +20,8 @@ TagManager:
   - HideObject
   - Bed
   - Bookshelf
+  - Trigger
+  - Death
   layers:
   - Default
   - TransparentFX
@@ -62,4 +64,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: foreground
+    uniqueID: 3394310843
     locked: 0
