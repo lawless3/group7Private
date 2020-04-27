@@ -13,6 +13,7 @@ public class DraggedObject : MonoBehaviour
     public bool afterFrame = false;
     private float SafetyBreak = 0;
     private bool isBreaking = false;
+    public bool isRound = false;
     // Use this for initialization
     void Start()
     {
@@ -140,7 +141,11 @@ public class DraggedObject : MonoBehaviour
     public void CreateRB()
     {
         rb = gameObject.AddComponent<Rigidbody2D>();
-        rb.freezeRotation = true;
+        if(!isRound)
+        {
+            rb.freezeRotation = true;
+        }
+        
     }
 
     public void DestroyRB()
